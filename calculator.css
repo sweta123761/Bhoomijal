@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('cal.jpg') ;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+
+.container {
+    text-align: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px; /* Slightly rounded corners for a modern look */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+    width: 90%;
+    max-width: 400px;
+    transition: transform 0.3s ease; /* Added subtle animation on hover */
+}
+
+.container:hover {
+    transform: scale(1.02); /* Slight scaling effect on hover */
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 24px; /* Increased font size for better readability */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Added text shadow */
+}
+
+.question {
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 16px; /* Slightly larger font for better visibility */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #34495e;
+    font-weight: bold; /* Added emphasis */
+}
+
+input {
+    width: 100%;
+    padding: 10px; /* Increased padding for better clickability */
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Subtle background for inputs */
+    transition: border-color 0.3s ease; /* Smooth border color transition */
+}
+
+input:focus {
+    border-color: #3498db; /* Highlighted input border on focus */
+    outline: none; /* Removed default outline */
+}
+
+button {
+    padding: 12px 25px; /* Enlarged for better usability */
+    background-color: #152631;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px; /* Slightly larger font for prominence */
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth color and transform transitions */
+}
+
+button:hover {
+    background-color: #135699;
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+}
+
+#result {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #2c3e50; /* Updated color for contrast */
+    font-weight: bold; /* Added emphasis */
+}
+body {
+    background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20231030/pngtree-blue-water-droplets-texture-beautiful-background-design-image_13709260.png);
+}
+.container {
+    
+    background-image: url("https://media.istockphoto.com/id/1361325478/photo/shadows-on-flat-metal.jpg?s=612x612&w=0&k=20&c=DEg6S-kOkCrng0DLzV9DR3W6FSZA9Jkq4HAotzlUULs=");
+  
+}
+:root {
+    --background-color: white;
+    --text-color: black;
+}
+
+.dark-mode {
+    --background-color: black;
+    --text-color: white;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}

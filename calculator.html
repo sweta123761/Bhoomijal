@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Water Usage Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Water Usage Calculator</h1>
+        <form id="waterUsageForm">
+            <div class="question">
+                <label for="shower">How many minutes did you spend showering today? (liters/min: 10)</label>
+                <input type="number" id="shower" placeholder="e.g., 5" required>
+            </div>
+            <div class="question">
+                <label for="washingHands">How many times did you wash your hands? (liters/wash: 2)</label>
+                <input type="number" id="washingHands" placeholder="e.g., 10" required>
+            </div>
+            <div class="question">
+                <label for="toiletFlush">How many times did you flush the toilet? (liters/flush: 6)</label>
+                <input type="number" id="toiletFlush" placeholder="e.g., 3" required>
+            </div>
+            <div class="question">
+                <label for="dishes">How many times did you wash dishes? (liters/wash: 20)</label>
+                <input type="number" id="dishes" placeholder="e.g., 2" required>
+            </div>
+            <div class="question">
+                <label for="drinking">How many liters of water did you drink?</label>
+                <input type="number" id="drinking" placeholder="e.g., 3" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        // JavaScript for Water Usage Calculator with Points
+        document.getElementById("waterUsageForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Get input values
+            const shower = parseInt(document.getElementById("shower").value) || 0;
+            const washingHands = parseInt(document.getElementById("washingHands").value) || 0;
+            const toiletFlush = parseInt(document.getElementById("toiletFlush").value) || 0;
+            const dishes = parseInt(document.getElementById("dishes").value) || 0;
+            const drinking = parseInt(document.getElementById("drinking").value) || 0;
+
+            // Calculate total water usage
+            const totalWaterUsage = (shower * 10) + (washingHands * 2) + (toiletFlush * 6) + (dishes * 20) + drinking;
+
+            // Assign points based on water usage
+            let points;
+            let message;
+
+            if (totalWaterUsage <= 50) {
+                points = 10;
+                message = "Excellent! You're conserving water very effectively.";
+            } else if (totalWaterUsage <= 100) {
+                points = 5;
+                message = "Good job! Try to reduce water usage further.";
+            } else {
+                points = 0;
+                message = "High usage detected. Please adopt water-saving habits.";
+            }
+
+            // Display result
+            document.getElementById("result").innerHTML = `
+                <p>Total Water Usage: ${totalWaterUsage} liters</p>
+                <p>${message}</p>
+                <p><strong>Points Earned:</strong> ${points}</p>
+            `;
+        });
+    </script>
+</body>
+</html>

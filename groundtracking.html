@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced WRIS - Groundwater Resources</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <!-- Chart.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="logoh1.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="logo.png" alt="Logo" width="30" height="30" class="me-2"> Advanced WRIS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Data</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Visualizations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Filters Sidebar -->
+            <div class="col-lg-3 bg-light p-3">
+                <h5 class="text-primary">Filters</h5>
+                <hr>
+                <div class="mb-3">
+                    <label for="stateSelect" class="form-label">Select State</label>
+                    <select id="stateSelect" class="form-select">
+                        <option value="">All States</option>
+                        <option value="bihar">Bihar</option>
+                        <option value="rajasthan">Rajasthan</option>
+                        <option value="karnataka">Karnataka</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="yearRange" class="form-label">Year Range</label>
+                    <input type="range" class="form-range" min="2000" max="2025" step="1" id="yearRange">
+                    <div class="d-flex justify-content-between">
+                        <span>2000</span>
+                        <span>2025</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary w-100" id="applyFilters">Apply Filters</button>
+            </div>
+
+            <!-- Map and Data Panel -->
+            <div class="col-lg-9">
+                <div id="map" class="mb-3" style="height: 500px; border: 1px solid #ddd;"></div>
+                <div class="row">
+                    <!-- Chart Section -->
+                    <div class="col-md-6">
+                        <canvas id="groundwaterChart" style="max-height: 300px;"></canvas>
+                    </div>
+                    <!-- Data Panel -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h6>Groundwater Data</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul id="dataList" class="list-group list-group-flush">
+                                    <li class="list-group-item">Loading data...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 bg-dark text-light">
+        <p>&copy; 2024 BHOOMIJAL. All rights reserved.</p>
+    </footer>
+
+    <!-- External JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        const map = L.map('map').setView([23.5937, 80.9629], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const groundwaterChart = new Chart(document.getElementById('groundwaterChart'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Groundwater Levels',
+                    data: [],
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+
+        function fetchData(filters = {}) {
+            const apiUrl = 'https://indiawris.gov.in/wris/#/'; // Replace with your API URL
+            const params = new URLSearchParams(filters);
+
+            fetch(`${apiUrl}?${params}`)
+                .then(response => response.json())
+                .then(data => {
+                    updateMap(data);
+                    updateChart(data);
+                    updateDataList(data);
+                })
+                .catch(err => console.error('Error fetching data:', err));
+        }
+
+        function updateMap(data) {
+            data.forEach(item => {
+                const marker = L.marker([item.latitude, item.longitude]).addTo(map);
+                marker.bindPopup(`<strong>${item.location}</strong><br>Level: ${item.level}m`);
+            });
+        }
+
+        function updateChart(data) {
+            const labels = data.map(item => item.year);
+            const levels = data.map(item => item.level);
+
+            groundwaterChart.data.labels = labels;
+            groundwaterChart.data.datasets[0].data = levels;
+            groundwaterChart.update();
+        }
+
+        function updateDataList(data) {
+            const list = document.getElementById('dataList');
+            list.innerHTML = '';
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.textContent = `${item.location} - ${item.level}m (Year: ${item.year})`;
+                list.appendChild(li);
+            });
+        }
+
+        document.getElementById('applyFilters').addEventListener('click', () => {
+            const state = document.getElementById('stateSelect').value;
+            const year = document.getElementById('yearRange').value;
+            fetchData({ state, year });
+        });
+
+        // Initial Data Fetch
+        fetchData();
+    </script>
+</body>
+</html>

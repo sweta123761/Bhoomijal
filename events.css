@@ -1,0 +1,56 @@
+/* Section Title Styles */
+section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Cards Container */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Individual Card Styles */
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    color: #0077b6;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.card .btn {
+    display: inline-block;
+    background-color: #0077b6;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.card .btn:hover {
+    background-color: #005f8b;
+}
