@@ -1,2 +1,1 @@
-# Bhoomijal
-#this is a site to help people realize the importance of groundwater conservation
+Bhoomijal is a comprehensive platform dedicated to promoting groundwater conservation through real-time data, education, and sustainable management practices.
