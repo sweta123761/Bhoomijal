@@ -2,47 +2,131 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="styless.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logoh1.png" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        background-color: #f8f9fa;
+        background:url('https://2.bp.blogspot.com/-V2Nfau9bJ1o/WT1BbfcP_LI/AAAAAAAAGAA/FBw3AtkIKng1OMo29jsGbk265draj0yQgCLcB/s1600/onlin-photoshop.blogspot%2B%25285%2529.jpg');
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .form-container {
+        background: #06cece;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 30px;
+        width: 100%;
+        max-width: 500px;
+      }
+      h1 {
+        text-align: center;
+        color: hsl(216, 26%, 4%);
+        margin-bottom: 20px;
+      }
+      p {
+        text-align: center;
+        color: #6c757d;
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: #495057;
+        font-weight: bold;
+      }
+      input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+      }
+      input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
-    <h1>Registration Form</h1>
-    <p>Please fill out this form with the required information</p>
-    <form method="post" action='https://register.org'>
-      <fieldset>
-        <label for="first-name">Enter Your First Name: <input id="first-name" name="first-name" type="text" required /></label>
-        <label for="last-name">Enter Your Last Name: <input id="last-name" name="last-name" type="text" required /></label>
-        <label for="email">Enter Your Email: <input id="email" name="email" type="email" required /></label>
-        <label for="new-password">Create a New Password: <input id="new-password" name="new-password" type="password" pattern="[a-z0-5]{8,}" required /></label>
-      </fieldset>
-      <fieldset>
-        <legend>Account type (required)</legend>
-        <label for="personal-account"><input id="personal-account" type="radio" name="account-type" class="inline" checked /> Personal</label>
-        <label for="business-account"><input id="business-account" type="radio" name="account-type" class="inline" /> Business</label>
-      </fieldset>
-      <fieldset>
-        <label for="profile-picture">Upload a profile picture: <input id="profile-picture" type="file" name="file" /></label>
-        <label for="age">Input your age (years): <input id="age" type="number" name="age" min="13" max="120" /></label>
-        <label for="referrer">How did you hear about us?
+    <div class="form-container">
+      <h1>Registration Form</h1>
+      <p>Please fill out this form with the required information</p>
+      <form method="post" action='https://register.org'>
+        <fieldset>
+          <label for="first-name">Enter Your First Name:</label>
+          <input id="first-name" name="first-name" type="text" required />
+
+          <label for="last-name">Enter Your Last Name:</label>
+          <input id="last-name" name="last-name" type="text" required />
+
+          <label for="email">Enter Your Email:</label>
+          <input id="email" name="email" type="email" required />
+
+          <label for="new-password">Create a New Password:</label>
+          <input id="new-password" name="new-password" type="password" pattern="[a-z0-5]{8,}" required />
+        </fieldset>
+
+        <fieldset>
+          <legend>Account type (required)</legend>
+          <label for="personal-account">
+            <input id="personal-account" type="radio" name="account-type" class="inline" checked /> Personal
+          </label>
+          <label for="business-account">
+            <input id="business-account" type="radio" name="account-type" class="inline" /> Business
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <label for="profile-picture">Upload a profile picture:</label>
+          <input id="profile-picture" type="file" name="file" />
+
+          <label for="age">Input your age (years):</label>
+          <input id="age" type="number" name="age" min="13" max="120" />
+
+          <label for="referrer">How did you hear about us?</label>
           <select id="referrer" name="referrer">
             <option value="">(select one)</option>
-            <option value="1">friends</option>
+            <option value="1">Friends</option>
             <option value="2">YouTube Channel</option>
-            <option value="3">google</option>
+            <option value="3">Google</option>
             <option value="4">Other</option>
           </select>
-        </label>
-        <label for="bio">Provide a bio:
+
+          <label for="bio">Provide a bio:</label>
           <textarea id="bio" name="bio" rows="3" cols="30" placeholder="I care about groundwater..."></textarea>
+        </fieldset>
+
+        <label for="terms-and-conditions">
+          <input class="inline" id="terms-and-conditions" type="checkbox" required name="terms-and-conditions" />
+          I accept the <a href="https:///news/terms-of-service/">terms and conditions</a>
         </label>
-      </fieldset>
-      <label for="terms-and-conditions">
-        <input class="inline" id="terms-and-conditions" type="checkbox" required name="terms-and-conditions" /> I accept the <a href="https:///news/terms-of-service/">terms and conditions</a>
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
   </body>
 </html>
