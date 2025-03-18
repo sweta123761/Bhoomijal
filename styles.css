@@ -32,6 +32,10 @@ body {
 }
 
 /* Button Hover Effect */
+.btn, .nav-link {
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
 .btn {
     transition: all 0.3s ease; /* Smooth transition for hover effect */
 }
