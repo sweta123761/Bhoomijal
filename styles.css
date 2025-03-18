@@ -32,9 +32,10 @@ body {
 }
 
 /* Button Hover Effect */
-.btn, .nav-link {
-    cursor: pointer; /* Change cursor to pointer on hover */
+body {
+    cursor: pointer; /* Change cursor to pointer for the entire page */
 }
+
 
 .btn {
     transition: all 0.3s ease; /* Smooth transition for hover effect */
@@ -61,8 +62,10 @@ body {
 
 /* Footer */
 footer {
-    background-color: #343a40;
-    color: white;
+    background-color: #ffcccb; /* Change footer color to baby pink */
+    color: black; /* Change text color for better contrast */
+    padding: 20px; /* Add padding for better spacing */
+
 }
 /* Navbar Styles */
 .navbar {
